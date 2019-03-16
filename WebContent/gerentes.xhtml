@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			  <html xmlns="http://www.w3.org/1999/xhtml"
+					xmlns:ui="http://java.sun.com/jsf/facelets"
+					xmlns:f="http://java.sun.com/jsf/core"
+					xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/_template.xhtml">
+   		<ui:define name="cabecalho">
+		   <h:outputText value="Cadastro de Gerentes" />
+    	</ui:define>
+		   
+   		<ui:define name="corpo">
+	        <h:form>
+	        	<f:validateBean disabled="true">
+			        <h:panelGrid columns="3">
+			        	<h:outputText value="Id" rendered="#{gerentesBean.gerente.id!=null}" />
+			        	<h:inputText id="id" value="#{gerentesBean.gerente.id}" rendered="#{gerentesBean.gerente.id!=null}" readonly="true"/>
+			        	<h:message for="id"  rendered="#{gerentesBean.gerente.id!=null}" />
+			        	
+			        	<h:outputText value="Nome"/>
+			        	<h:inputText id="nome" value="#{gerentesBean.gerente.nome}"/>
+			        	<h:message for="nome" />
+			        	
+						<h:outputText value="Telefone"/>
+						<h:inputText id="telefone" value="#{gerentesBean.gerente.telefone}"/>
+						<h:message for="telefone" />
+			        	
+			        	<h:outputText value="Rua"/>
+						<h:inputText id="rua" value="#{gerentesBean.gerente.endereco.rua}" />
+						<h:message for="rua" />
+			
+			        	<h:outputText value="Cidade"/>
+			        	<h:inputText id="cidade" value="#{gerentesBean.gerente.endereco.cidade}"/>
+			        	<h:message for="cidade" />
+
+			        	<h:outputText value="Estado"/>
+			        	<h:inputText id="estado" value="#{gerentesBean.gerente.endereco.estado}"/>
+			        	<h:message for="estado" />
+			        	
+			        	<h:commandButton value="Gravar" action="#{gerentesBean.grava}"/> 
+			        </h:panelGrid>
+			    </f:validateBean>
+	        </h:form>
+	        
+	        <h2><h:outputText value="Todos os Gerentes" /></h2>
+	        <hr />
+	        <h:form>
+	        <h:dataTable value="#{gerentesBean.gerentes}" var="gerente">
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="ID"/></f:facet>
+	        		#{gerente.id}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Nome"/></f:facet>
+	        		#{gerente.nome}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Telefone"/></f:facet>
+	        		#{gerente.telefone}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Rua"/></f:facet>
+	        		#{gerente.endereco.rua}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Cidade"/></f:facet>
+	        		#{gerente.endereco.cidade}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Estado"/></f:facet>
+	        		#{gerente.endereco.estado}
+	        	</h:column>
+	        	<h:column>
+	        		<f:facet name="header"><h:outputText value="Ações"/></f:facet>
+	        		<h:commandLink value="Remover" action="#{gerentesBean.remove}">
+					<f:setPropertyActionListener value="#{gerente}" target="#{gerentesBean.gerente}"/>
+	        		</h:commandLink> |
+	        		<h:commandLink value="Alterar">
+					<f:setPropertyActionListener value="#{gerente}" target="#{gerentesBean.gerente}"/>
+	        		</h:commandLink>
+	        	</h:column>
+	        </h:dataTable>
+	        </h:form>
+		</ui:define>
+	</ui:composition>
+</html>
