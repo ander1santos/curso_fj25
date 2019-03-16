@@ -34,8 +34,8 @@
 			        	<h:inputText id="numero" value="#{contasBean.conta.numero}"/>
 			        	<h:message for="numero" />
 
-			        	<h:outputText value="Gerente" rendered="false"/>
-								<h:selectOneMenu id="gerente" value="#{not empty contasBean.conta.gerente.id ? contasBean.conta.gerente.id : contasBean.gerenteId}" rendered="false">
+			        	<h:outputText value="Gerente" rendered="true"/>
+								<h:selectOneMenu id="gerente" value="#{not empty contasBean.conta.gerente.id ? contasBean.conta.gerente.id : contasBean.gerenteId}" rendered="true">
 			        		<f:selectItem itemLabel="Escolha o gerente da conta" itemValue="" noSelectionOption="true"/>
 			        		<f:selectItems value="#{gerentesBean.gerentes}" var="gerente" itemLabel="#{gerente.nome}" itemValue="#{gerente.id}" />
 			        	</h:selectOneMenu>
@@ -70,7 +70,7 @@
 	        		<f:facet name="header"><h:outputText value="Núm. Conta"/></f:facet>
 	        		#{conta.numero}
 	        	</h:column>
-			<h:column rendered="false">
+			<h:column rendered="true">
 	        		<f:facet name="header"><h:outputText value="Gerente"/></f:facet>
 	        		#{conta.gerente.nome}
 	        	</h:column>
