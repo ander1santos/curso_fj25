@@ -1,17 +1,23 @@
 package br.com.caelum.financas.mb;
 
 import java.util.List;
+
+import br.com.caelum.financas.dao.MovimentacaoDao;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
 @RequestScoped
 public class PesquisaMovimentacoesBean {
 
+	@Inject
+	private MovimentacaoDao movDao;
+	
 	private Conta conta = new Conta();
 	private Integer mes;
 	private TipoMovimentacao tipoMovimentacao;
@@ -20,7 +26,8 @@ public class PesquisaMovimentacoesBean {
 	
 	public void pesquisa() {
 		System.out.println("Pesquisando pelos filtros solicitados");
-
+		
+		this.movimentacoes = movDao.pesquisa(getConta(), tipoMovimentacao, getMes());
 	}
 
 	public List<Movimentacao> getMovimentacoes() {
